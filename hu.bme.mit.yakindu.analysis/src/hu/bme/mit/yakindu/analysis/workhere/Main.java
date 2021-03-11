@@ -5,6 +5,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.junit.Test;
 import org.yakindu.sct.model.sgraph.State;
 import org.yakindu.sct.model.sgraph.Statechart;
+import org.yakindu.sct.model.sgraph.Transition;
 
 import hu.bme.mit.model2gml.Model2GML;
 import hu.bme.mit.yakindu.analysis.modelmanager.ModelManager;
@@ -30,6 +31,21 @@ public class Main {
 			if(content instanceof State) {
 				State state = (State) content;
 				System.out.println(state.getName());
+				if(state.getOutgoingTransitions().isEmpty()) {
+					System.out.println("The state \""+state.getName()+"\" is a trap!");
+				}
+			}
+			if(content instanceof Transition) {
+				Transition transition = (Transition) content;
+				String sourceState = transition.getSource().getName();
+				String destState = transition.getTarget().getName();
+				if(destState.isEmpty()) {		
+					
+					System.out.println("No state name found.  Using recommended name:\"" + transition.getSpecification().toString()+"\"");
+					destState = transition.getSpecification().toString();
+					transition.getTarget().setName(destState);
+				}
+				System.out.println(sourceState + "->" + destState);
 			}
 		}
 		
