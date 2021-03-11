@@ -7,19 +7,19 @@ import hu.bme.mit.yakindu.analysis.ITimerCallback;
 public interface IExampleStatemachine extends ITimerCallback,IStatemachine {
 	public interface SCInterface {
 	
-		public void raiseStart();
+		public void raiseBegin();
 		
-		public void raiseWhite();
+		public void raiseLight();
 		
-		public void raiseBlack();
+		public void raiseDark();
 		
-		public long getWhiteTime();
+		public long getYellowTime();
 		
-		public void setWhiteTime(long value);
+		public void setYellowTime(long value);
 		
-		public long getBlackTime();
+		public long getRedTime();
 		
-		public void setBlackTime(long value);
+		public void setRedTime(long value);
 		
 	}
 	
